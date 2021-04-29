@@ -27,11 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Post = ({ handlePost, post: { id, title, body }, isShort }) => {
-  const content = isShort ? body?.slice(0, 150) : body;
-
-    return (
-  <TouchableWithoutFeedback onPress={() => handlePost(id)}>
+const Post = ({ post: { id, title, body } }) => (
     <View
         key={id}
         style={styles.root}
@@ -42,24 +38,17 @@ const Post = ({ handlePost, post: { id, title, body }, isShort }) => {
         {`Title: ${title}`}
       </Text>
       <Text style={styles.body}>
-        {`Body: ${content}`}
+        {`Body: ${body}`}
       </Text>
     </View>
-  </TouchableWithoutFeedback>
-);};
+);
 
 Post.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-  handlePost: PropTypes.func,
-  isShort: PropTypes.bool,
   }),
-};
-Post.defaultProps = {
-  handlePost: () => {},
-  isShort: false,
 };
 
 export default Post;

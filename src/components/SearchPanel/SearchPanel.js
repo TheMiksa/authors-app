@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     height: 40,
     position: 'relative',
   },
-  rootIcon: {
+  icon: {
     position: 'absolute',
     paddingLeft: 11,
     paddingTop: 11,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
 const SearchPanel = ({ onSearch }) => (
   <View style={styles.root}>
-    <SearchIcon style={styles.rootIcon} />
+    <SearchIcon style={styles.icon} />
     <TextInput
       style={styles.input}
       onChangeText={onSearch}

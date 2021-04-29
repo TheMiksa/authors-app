@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {BackHandler, Text,} from 'react-native';
+import {BackHandler, Text, StyleSheet } from 'react-native';
 import { SearchPanel } from '../SearchPanel';
 import { Post } from '../Post';
 import PropTypes from 'prop-types';
 
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: '400',
+    fontSize: 16,
+  },
+});
+
 const PostList = ({ author, posts, handleAuthor }) => {
   const [search, setSearch] = useState('');
-  const [currentPost, setCurrentPost] = useState(null);
 
   useEffect(() => {
     const backAction = () => {
@@ -31,21 +37,14 @@ const PostList = ({ author, posts, handleAuthor }) => {
       post.body.toLowerCase().includes(search.toLowerCase()))
     );
   };
-  const selectedPost = posts.find(post => post.id === currentPost);
   return (
     <>
-      <Text>{`${author.name}'s`}</Text>
-      {selectedPost ? (
-        <Post handlePost={setCurrentPost} post={selectedPost} key={selectedPost.id} />
-      ) : (
-        <>
-          <SearchPanel onSearch={setSearch} />
-          {posts.filter(onPostsSearch)
-              .map(post => (
-                  <Post handlePost={setCurrentPost} post={post} key={post.id} isShort />
-              ))}
-        </>
-      )}
+      <Text style={styles.title}>{`${author.name}'s Posts`}</Text>
+      <SearchPanel onSearch={setSearch} />
+      {posts.filter(onPostsSearch)
+        .map(post => (
+          <Post post={post} key={post.id} />
+       ))}
     < />
   );
 };
